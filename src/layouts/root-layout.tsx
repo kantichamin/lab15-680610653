@@ -8,8 +8,10 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { currentStudent } from "@/lib/mock-data";
 
 export default function RootLayout() {
+  const fullName = `${currentStudent.firstName} ${currentStudent.lastName}`;
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -25,6 +27,10 @@ export default function RootLayout() {
         <main className="flex-1 p-4">
           <Outlet />
         </main>
+        <Separator/>
+        <footer className="bordor-t p-4 text-center text-xs text-muted-foreground">
+          จัดทำโดย {fullName} รหัสนักศึกษา {currentStudent.studentId}
+        </footer>
       </SidebarInset>
     </SidebarProvider>
   );

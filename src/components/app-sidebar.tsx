@@ -1,5 +1,11 @@
-import { BookOpen, Calendar, Home, Settings } from "lucide-react";
+import { BookOpen, Home } from "lucide-react";
 import { Link, useLocation } from "react-router";
+import { Separator } from "@/components/ui/separator";
+import { currentUser } from "@/lib/mock-data";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
+
 
 import {
   Sidebar,
@@ -11,13 +17,12 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarFooter,
 } from "@/components/ui/sidebar";
 
 const items = [
   { title: "หน้าแรก", url: "/", icon: Home },
   { title: "ลงทะเบียนเรียน", url: "/enrollment", icon: BookOpen },
-  { title: "ตารางเรียน", url: "/schedule", icon: Calendar },
-  { title: "ตั้งค่า", url: "/settings", icon: Settings },
 ];
 
 export function AppSidebar() {
@@ -49,6 +54,19 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <Separator/>
+      <SidebarFooter>
+      <div className="flex items-center gap-3 px-2 py-1.5">
+        <Avatar>
+          <AvatarImage src={currentUser.avatar}></AvatarImage>
+          <AvatarFallback>JP</AvatarFallback>
+        </Avatar>
+        <div className="flex min-w-0 flex-col">
+          <span className="turncate text-sm font-medium">{currentUser.nickname}</span>
+          <Badge variant="outline" className="p-1 font-sm text-[10px]">{currentUser.role}</Badge>
+        </div>
+      </div>
+      </SidebarFooter>
     </Sidebar>
   );
 }
